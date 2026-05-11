@@ -153,7 +153,7 @@ matrix* model_backward(model* m, const matrix* grad_output) {
         }
     }
 
-    // 在model_backward结束时统一重置所有临时arena
+    // ✅ 关键：在model_backward结束时统一重置所有临时arena
     // 这样确保了每层的grad_input在传递给上一层时都是有效的
     for (u32 i = 0; i < m->num_layers; i++) {
         if (m->layers[i]->temp_arena) {
